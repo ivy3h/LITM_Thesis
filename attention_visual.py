@@ -20,7 +20,7 @@ MODEL_IDS = [
 
 NUM_DOCUMENTS_LIST = [10, 20, 30]  
 DATASET_NAME = "google-research-datasets/nq_open" 
-NUM_EXAMPLES_TO_RUN = 100 
+NUM_EXAMPLES_TO_RUN = 100
 MAX_TOKENS_PER_DOC = 4096 
 MAX_CONTEXT_LENGTH = 32768 
 
@@ -30,8 +30,8 @@ model_plot_styles = {
     "Qwen/Qwen2.5-3B-Instruct":   ['#08D9D6', '#08D9D6', '--', 's'], 
     "Qwen/Qwen2.5-7B-Instruct": ['#252A34', '#252A34', '-', 'o'],
 }
-fontsize = 10
-output_filename = "llama3_attention_comparison_k10_20_30_auto_yaxis.jpg" 
+fontsize = 15
+output_filename = "qwen_attention_comparison_k10_20_30_auto_yaxis.jpg" 
 
 # --- Helper Function ---
 def hex_to_rgba(hex_color, alpha=0.5):
@@ -385,17 +385,17 @@ for i, num_docs in enumerate(NUM_DOCUMENTS_LIST):
             print(f"No results found for {model_id} with K={num_docs}")
 
     # --- Subplot Styling ---
-    ax.set_title(f"K = {num_docs}", fontsize=fontsize * 1.2)
-    ax.set_xlabel("Document Position", fontsize=fontsize)
+    ax.set_title(f"K = {num_docs}", fontsize=fontsize * 0.8)
+    ax.set_xlabel("Document Position", fontsize=fontsize * 0.8)
     # Set Y label on the first plot, or uncomment the next line to label all
     if i == 0:
-         ax.set_ylabel("Avg. Attention Weight", fontsize=fontsize)
+         ax.set_ylabel("Avg. Attention Weight", fontsize=fontsize* 0.8)
     # else: # Optional: Label Y axis on all plots if not shared
     #     ax.set_ylabel("Avg. Attention Weight", fontsize=fontsize)
 
 
     # Ticks
-    ax.tick_params(axis='both', which='major', labelsize=fontsize * 0.9)
+    ax.tick_params(axis='both', which='major', labelsize=fontsize * 0.8)
     tick_step = max(1, (num_docs -1) // 4 if num_docs > 1 else 1)
     ticks = np.arange(1, num_docs + 1, tick_step)
     if num_docs > 1 and ticks[-1] != num_docs :
@@ -433,8 +433,8 @@ if sorted_handles:
     fig.legend(
         sorted_handles, sorted_labels,
         loc='center right',
-        bbox_to_anchor=(0.99, 0.5),
-        fontsize=fontsize * 0.9,
+        bbox_to_anchor=(1.02, 0.5),
+        fontsize=fontsize * 0.8,
         frameon=False,
         ncol=1
     )
