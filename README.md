@@ -1,4 +1,4 @@
-# Research and Optimization of 'Lost-in-the-Middle' in Long-Context Processing of Large Language Models 🐣
+# Research and Optimization of 'Lost-in-the-Middle' in Long-Context Processing of Large Language Models 🧚
 
 This repository contains the materials and code for my graduation thesis, titled *"Research and Optimization of 'Lost-in-the-Middle' in Long-Context Processing of Large Language Models"*.
 
@@ -11,13 +11,13 @@ pip install -r requirements.txt
 
 
 
-## Optimization Methods Based on Model Training 🔥
+## Model Training 🔥
 
 
 
 
 
-## Optimization Methods Based on Explicit Attention Adjustment 🎯
+## Explicit Attention Adjustment 🎯
 
 
 ### U-shaped Attention Visualization
@@ -33,16 +33,54 @@ python attention_visual.py
 To run the FocusICL evaluation on GSM8K and MMLU datasets, execute the following commands:
 
 ```bash
+# Example for GSM8K with Qwen2.5-7B-Instruct
 python attention_eval.py \
     --model_name Qwen/Qwen2.5-7B-Instruct \
     --dataset gsm8k \
     --num_eval_samples 500 \
     --k_values 20 40 60 80 \
     --p_values 0.1 0.2 0.3 \
-    --seed 42
-```
-Replace the --dataset argument with mmlu to run on the MMLU dataset.
+    --run_focus \
+    --max_new_tokens 256
 
+# Example for MMLU with Qwen2.5-7B-Instruct
+python attention_eval.py \
+    --model_name Qwen/Qwen2.5-7B-Instruct \
+    --dataset mmlu \
+    --mmlu_subset all \
+    --num_eval_samples 500 \
+    --k_values 20 40 60 80 \
+    --p_values 0.1 0.2 0.3 \
+    --run_focus \
+    --max_new_tokens 20
+```
+
+### FITM
+
+To run the FITM evaluation on GSM8K and MMLU datasets, execute the following commands:
+
+```bash
+# Example for GSM8K with Qwen2.5-7B-Instruct
+python attention_eval.py \
+    --model_name Qwen/Qwen2.5-7B-Instruct \
+    --dataset gsm8k \
+    --num_eval_samples 500 \
+    --k_values 20 40 60 80\
+    --run_fitm \
+    --fitm_temperatures 1e-4 5e-5 \
+    --max_new_tokens 256
+
+# Example for MMLU with Qwen2.5-7B-Instruct
+python attention_eval.py \
+    --model_name Qwen/Qwen2.5-7B-Instruct \
+    --dataset mmlu \
+    --mmlu_subset all \
+    --num_eval_samples 500 \
+    --k_values 20 40 60 80\
+    --run_fitm \
+    --fitm_temperatures 1e-4 5e-5 \
+    --max_new_tokens 20 
+```
 
 
 ## Acknowledgement ✨
