@@ -1,6 +1,6 @@
-# Research and Optimization of 'Lost-in-the-Middle' in Long-Context Processing of Large Language Models 🧚‍♀️
+# Research and Optimization of _Lost-in-the-Middle_ in Long-Context Processing of Large Language Models 🧚‍♀️
 
-This repository contains the materials and code for my graduation thesis, titled *"Research and Optimization of 'Lost-in-the-Middle' in Long-Context Processing of Large Language Models"*.
+This repository contains the materials and code for my graduation thesis, titled *"Research and Optimization of _Lost-in-the-Middle_ in Long-Context Processing of Large Language Models"*.
 
 [[Dataset]](https://huggingface.co/datasets/JiayiHe/IN2_Training) • [[FILM-Qwen-7B]](https://www.modelscope.cn/models/Jiayihe/FILM-Qwen-7B) • [[FILM-Mistral-v0.2-7B]](https://www.modelscope.cn/models/Jiayihe/FILM-Mistral-v0.2-7B) • [[FILM-Mistral-v0.3-7B]](https://www.modelscope.cn/models/Jiayihe/FILM-Mistral-v0.3-7B) 
 
@@ -23,7 +23,7 @@ python data_construction.py
 ```
 
 ### Fine-tuning
-To fine-tune the model using the constructed data, set up [SWIFT](https://swift.readthedocs.io/en/latest/) and run the following command:
+To fine-tune the model using the constructed data, set up [SWIFT](https://swift.readthedocs.io/en/latest/) and run the following commands:
 ```bash
 # Setup
 pip install 'ms-swift'
@@ -118,9 +118,9 @@ python attention_eval.py \
 
 ## Evaluation 💫
 
-To run the VAL evaluation, run the following commands:
+To run the **VAL** evaluation, run the following command:
 ```bash
-# Example with Qwen2.5-7B-Instruct
+# Example for document retrieval with Qwen2.5-7B-Instruct
 export VLLM_SKIP_SHARED_MEMORY_CHECK=1
 python ./vllm_inference/vllm_inference.py \
     --model_path Qwen/Qwen2.5-7B-Instruct \
@@ -129,27 +129,11 @@ python ./vllm_inference/vllm_inference.py \
     --output_folder ./VaLProbing/VaLProbing-32K/results/Qwen2.5-7B-Instruct/ \
     --tensor_parallel_size 2 \
     --max_length 128
-
-python ./vllm_inference/vllm_inference.py \
-    --model_path Qwen/Qwen2.5-7B-Instruct \
-    --testdata_folder ./ValProbing-32K/ \
-    --testdata_file code_backward_32k.jsonl \
-    --output_folder ./VaLProbing/VaLProbing-32K/results/Qwen2.5-7B-Instruct/ \
-    --tensor_parallel_size 2 \
-    --max_length 128
-
-python ./vllm_inference/vllm_inference.py \
-    --model_path Qwen/Qwen2.5-7B-Instruct \
-    --testdata_folder ./ValProbing-32K/ \
-    --testdata_file database_forward_32k.jsonl \
-    --output_folder ./VaLProbing/VaLProbing-32K/results/Qwen2.5-7B-Instruct/ \
-    --tensor_parallel_size 2 \
-    --max_length 128
 ```
 
-To run the long-context evaluation, run the following commands:
+To run the **long-context** evaluation, run the following command:
 ```bash
-# Example with Qwen2.5-7B-Instruct
+# Example for tasks with max_length = 32 using Qwen2.5-7B-Instruct
 export VLLM_SKIP_SHARED_MEMORY_CHECK=1
 python ./vllm_inference/vllm_inference.py \
     --model_path Qwen/Qwen2.5-7B-Instruct \
@@ -158,60 +142,18 @@ python ./vllm_inference/vllm_inference.py \
     --output_folder ./real_world_long/results/Qwen2.5-7B-Instruct/ \
     --max_length 32 \
     --tensor_parallel_size 2
-
-python ./vllm_inference/vllm_inference.py \
-    --model_path Qwen/Qwen2.5-7B-Instruct \
-    --testdata_file LongBench_output_64.jsonl \
-    --testdata_folder ./real_world_long/prompts/ \
-    --output_folder ./real_world_long/results/Qwen2.5-7B-Instruct/ \
-    --max_length 64 \
-    --tensor_parallel_size 2
-
-python ./vllm_inference/vllm_inference.py \
-    --model_path Qwen/Qwen2.5-7B-Instruct \
-    --testdata_file LongBench_output_128.jsonl \
-    --testdata_folder ./real_world_long/prompts/ \
-    --output_folder ./real_world_long/results/Qwen2.5-7B-Instruct/ \
-    --max_length 128 \
-    --tensor_parallel_size 2
-
-python ./vllm_inference/vllm_inference.py \
-    --model_path Qwen/Qwen2.5-7B-Instruct \
-    --testdata_file LongBench_output_512.jsonl \
-    --testdata_folder ./real_world_long/prompts/ \
-    --output_folder ./real_world_long/results/Qwen2.5-7B-Instruct/ \
-    --max_length 512 \
-    --tensor_parallel_size 2
 ```
 
-To run the short-context evaluation, run the following commands:
+To run the **short-context** evaluation, run the following command:
 ```bash
-# Example with Qwen2.5-7B-Instruct
+# Example for CommonsenceQA with Qwen2.5-7B-Instruct
 export VLLM_SKIP_SHARED_MEMORY_CHECK=1
-python ./vllm_inference/vllm_inference.py \
-    --model_path Qwen/Qwen2.5-7B-Instruct \
-    --testdata_file math_4shot.jsonl \
-    --testdata_folder ./short_tasks/prompts/ \
-    --output_folder ./short_tasks/results/Qwen2.5-7B-Instruct/ \
-    --max_length 1024 \
-    --tensor_parallel_size 2 \
-    --trust_remote_code True
-
 python ./vllm_inference/vllm_inference.py \
     --model_path Qwen/Qwen2.5-7B-Instruct \
     --testdata_file csqa_0shot.jsonl \
     --testdata_folder ./short_tasks/prompts/ \
     --output_folder ./short_tasks/results/Qwen2.5-7B-Instruct/ \
     --max_length 128 \
-    --tensor_parallel_size 2 \
-    --trust_remote_code True
-
-python ./vllm_inference/vllm_inference.py \
-    --model_path Qwen/Qwen2.5-7B-Instruct \
-    --testdata_file gsm8k_8shot.jsonl \
-    --testdata_folder ./short_tasks/prompts/ \
-    --output_folder ./short_tasks/results/Qwen2.5-7B-Instruct/ \
-    --max_length 1024 \
     --tensor_parallel_size 2 \
     --trust_remote_code True
 ```
