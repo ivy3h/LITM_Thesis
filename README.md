@@ -12,8 +12,6 @@ cd LITM_Thesis
 pip install -r requirements.txt
 ```
 
-
-
 ## Model Training 🔥
 
 ### Data Construction
@@ -158,5 +156,16 @@ python ./vllm_inference/vllm_inference.py \
     --trust_remote_code True
 ```
 
+To compute and plot the results, run the following command:
+```bash
+python evaluation.py
+```
+
 ## Acknowledgement ✨
 Our code is built on [FILM](https://github.com/microsoft/FILM) and [SWIFT](https://swift.readthedocs.io/en/latest/). We extend our gratitude to the authors for their work!
+
+## License 🍃
+
+This project is licensed under the MIT License - see the [LICENSE.txt](LICENSE.txt) file for details.
+
+This project is a modification and extension of [FILM](https://github.com/microsoft/FILM) by Microsoft Corporation, also licensed under the MIT License.
